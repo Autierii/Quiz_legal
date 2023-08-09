@@ -62,6 +62,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   display: none;
+  margin-top: 20px;
 }
 
 .next-btn:hover {

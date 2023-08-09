@@ -43,6 +43,7 @@ function loadQuestion() {
   options.forEach((option, index) => {
     option.textContent = question.options[index];
     option.classList.remove('correct-option');  // Remover classe de resposta correta
+    option.style.backgroundColor = '#585B7E';   // Redefinir cor do fundo
     option.addEventListener('click', checkAnswer);
   });
 
