@@ -16,6 +16,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
+  transform: scale(1.5); /* Aumenta a escala do quiz em 50% */
 }
 
 .question-container {
@@ -23,7 +24,7 @@ body {
 }
 
 .question {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -54,6 +55,14 @@ body {
   background-color: #27AE60 !important;
 }
 
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.prev-btn,
 .next-btn {
   background-color: #6D6D6D;
   color: #E2E2E2;
@@ -61,10 +70,9 @@ body {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  display: none;
-  margin-top: 20px;
 }
 
+.prev-btn:hover,
 .next-btn:hover {
   background-color: #525252;
 }

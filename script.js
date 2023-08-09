@@ -2,6 +2,7 @@
 const questionContainer = document.querySelector('.question-container');
 const questionElement = document.querySelector('.question');
 const options = document.querySelectorAll('.option');
+const prevButton = document.getElementById('prev-btn');
 const nextButton = document.getElementById('next-btn');
 
 // Array de perguntas e respostas
@@ -47,6 +48,7 @@ function loadQuestion() {
     option.addEventListener('click', checkAnswer);
   });
 
+  prevButton.style.display = currentQuestion === 0 ? 'none' : 'block';  // Exibir ou ocultar botão Pergunta Anterior
   nextButton.style.display = 'none';  // Esconder botão Próxima Pergunta
 }
 
@@ -71,21 +73,54 @@ function checkAnswer(e) {
   });
 
   nextButton.style.display = 'block';  // Exibir botão Próxima Pergunta
-}
 
-// Função para avançar para a próxima pergunta
-function nextQuestion() {
-  currentQuestion++;  // Avançar para a próxima pergunta
-
-  if (currentQuestion < quizData.length) {
-    loadQuestion();  // Carregar a próxima pergunta
-    nextButton.style.display = 'none';  // Esconder botão Próxima Pergunta
-  } else {
-    questionContainer.innerHTML = '<h2>Quiz Concluído!</h2>';  // Exibir mensagem de conclusão
+  if (currentQuestion === quizData.length - 1) {
+    nextButton.textContent = 'Ver Resultados';  // Alterar texto do botão na última pergunta
   }
 }
 
-// Adicionar evento de clique ao botão Próxima Pergunta
+// Função para avançar para a próxima pergunta ou finalizar o quiz
+function nextQuestion() {
+  if (currentQuestion < quizData.length - 1) {
+    currentQuestion++;  // Avançar para a próxima pergunta
+    loadQuestion();  // Carregar a próxima pergunta
+    options.forEach(option => {
+      option.style.backgroundColor = '#585B7E';   // Redefinir cor do fundo
+    });
+    nextButton.style.display = 'none';  // Esconder botão Próxima Pergunta
+  } else {
+    questionContainer.innerHTML = '<h2>Quiz Concluído!</h2>';  // Exibir mensagem de conclusão
+    prevButton.style.display = 'none';  // Esconder botão Pergunta Anterior na tela final
+    nextButton.style.display = 'none';  // Esconder botão Próxima Pergunta na tela final
+  }
+}
+
+// Função para voltar para a pergunta anterior
+function prevQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;  // Voltar para a pergunta anterior
+    loadQuestion();  // Carregar a pergunta anterior
+    options.forEach(option => {
+      option.style.backgroundColor = '#585B7E';   // Redefinir cor do fundo
+    });
+    nextButton.style.display = 'none';  // Esconder botão Próxima Pergunta
+}
+}
+
+// Função para voltar para a pergunta anterior
+function prevQuestion() {
+if (currentQuestion > 0) {
+  currentQuestion--;  // Voltar para a pergunta anterior
+  loadQuestion();  // Carregar a pergunta anterior
+  options.forEach(option => {
+    option.style.backgroundColor = '#585B7E';   // Redefinir cor do fundo
+  });
+  nextButton.style.display = 'none';  // Esconder botão Próxima Pergunta
+}
+}
+
+// Adicionar eventos de clique aos botões
+prevButton.addEventListener('click', prevQuestion);
 nextButton.addEventListener('click', nextQuestion);
 
 loadQuestion();  // Carregar a primeira pergunta
